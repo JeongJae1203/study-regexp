@@ -5,6 +5,7 @@ https://www.omdbapi.com/?apikey=7035c60c&s=frozen
 The quick brown fox jumps over the lazy dog.
 abbcccdddd
 http://localhost:1234
+동해물과_백두산이 마르고 닳도록
 `;
 {
 	// 생성자 함수
@@ -68,4 +69,37 @@ http://localhost:1234
 	console.log('match w{2,3} all :: ', str.match(/\w{2,3}/g));	// result :: 모든 2 ~ 3개의 단어 출력
 	console.log('match 숫자, 알파벳 포함 {2,3} all :: ', str.match(/\b\w{2,3}\b/g));	
 	// result :: ['010', 'com', 'www', 'com', 'The', 'fox', 'the', 'dog']
+}
+{
+	console.log('match f, o, x :: ', str.match(/[fox]/g));
+	console.log('match 0 - 9 :: ', str.match(/[0-9]/g));
+	console.log('match 0 - 9 1자리 이상 :: ', str.match(/[0-9]{1,}/g));
+	console.log('match 가 - 힣 한글 :: ', str.match(/[가-힣]{1,}/g));	
+	// result :: ['동해물과', '백두산이', '마르고', '닳도록']
+}
+{
+	const h = `   the hello   word     !
+	
+	`;
+
+	console.log('match 단어 전체 :: ', str.match(/\w/g));
+	console.log('match 문자 경계 :: ', str.match(/\b/g));
+	console.log('match ?? :: ', str.match(/\bf\w{1,}\b/g));	// result :: ['frozen', 'fox']
+	console.log('match 숫자 전체 :: ', str.match(/\d/g));
+	console.log('match 숫자 1자리 이상 :: ', str.match(/\d{1,}/g));
+	console.log('match 공백, 탭 :: ', str.match(/\s/g));
+	console.log('match 공백, 탭 :: ', h.match(/\s/g));
+	console.log('공백 문자 관련 삭제 :: ', h.replace(/\s/g, ''));	// result :: thehelloword!
+}
+
+const str2 = `
+010-1234-5678
+thesecon@gmail.com
+https://www.omdbapi.com/?apikey=7035c60c&s=frozen
+The quick brown fox jumps over the lazy dog.
+abbcccdddd
+`;
+{
+	console.log('str2 match @ 앞쪽 일치 1개 이상 7개 이하 :: ', str2.match(/.{1,7}(?=\@)/g)); // result :: ['hesecon']
+	console.log('str2 match @ 뒤쪽 일치 1개 이상 :: ', str2.match(/(?<=\@).{1,}/g)); // result :: ['gmail.com']
 }
